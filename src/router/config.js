@@ -1,17 +1,23 @@
 import React from 'react'
-import { HashRouter, Route, Switch } from "react-router-dom";
+import {
+    BrowserRouter,
+    Route,
+    Switch
+} from "react-router-dom";
 import App from "../App"
 import Index from '../view/index/index'
-export default class IRoute extends React.Component{
-    render(){
+import Todolist from '../view/todoList/index.js'
+export default class IRoute extends React.Component {
+    render() {
         return (
-            <HashRouter>
+            <BrowserRouter>
                 <App>
                     <Switch>
                         <Route path="/index" component={Index} />
+                        <Route path="/todolist" component={Todolist} />
                     </Switch>
                 </App>
-            </HashRouter>
+            </BrowserRouter>
         )
     }
 }
