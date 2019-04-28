@@ -9,7 +9,7 @@ export default class Todolist extends React.Component {
         super(props) //调用父类 Component 的方法
         this.state = { //组件中存值
             value: '',
-            list: [1, 2, 3]
+            list: []
         }
     }
 
@@ -19,7 +19,7 @@ export default class Todolist extends React.Component {
             value,
         })
         //在input值改变的时候打印子组件的ref值
-        console.log(this.refs['childRefValue'].refs['refValue'].value)
+        console.log(this.refs['childRefValue'].refs['refValue'])
     }
 
     addValue = (e) => {
