@@ -7,13 +7,24 @@
 ![redux图](https://github.com/479496771/react-js/blob/master/md-img/redux.png)
 
 > A: action creators "要借什么书"
+
 > B: store "管理员"
+
 > C: reducers "记录本"
+
 > D: react Components “需要书”
 
-> D -> A -> B -> C 1.组件 D 向 A 索要书（数据）//索要需求传给 action creators
+流程：
+
+> D -> A -> B -> C
+
+> 1.组件 D 向 A 索要书（数据）//索要需求传给 action creators
+
 > 2.A 向 store 向管理员要书（）//通过 action creators 把这个信息传递给 store
-> 3.store 不知道要什么书 ，查询 reducers 获取数据 //store 得去查询数据是什么才能给 4.获取到数据, store 把这个数据返回给组件
+
+> 3.store 不知道要什么书 ，查询 reducers 获取数据 //store 得去查询数据是什么才能给
+
+> 4.获取到数据, store 把这个数据返回给组件
 
 ### 特点：
 
