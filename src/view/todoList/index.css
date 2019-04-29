@@ -1,0 +1,68 @@
+.show {
+    animation: show-hide 3s ease-out forwards;
+    height: 100px;
+}
+
+.hide {
+    height: 100px;
+    animation: hide-show 3s ease-out forwards;
+    color: #fff;
+}
+
+@keyframes hide-show {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+        background: blue;
+    }
+
+    100% {
+        opacity: 1;
+        background: #000;
+    }
+}
+
+@keyframes show-hide {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+        background: blue;
+    }
+
+    100% {
+        opacity: 0;
+        background: #000;
+    }
+}
+
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 1s ease-in;
+}
+
+.fade-enter-done {
+    opacity: 1;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 1;
+    transition: opacity 1s ease-in;
+}
+
+.fade-exit-done {
+    opacity: 0;
+}

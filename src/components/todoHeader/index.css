@@ -1,0 +1,21 @@
+.active {
+    background: blue;
+    color: #fff;
+    transition: all 1s ease-in;
+    border: none;
+}
+
+.default {
+    background: #fff;
+    color: #000;
+    transition: all 1s ease-out;
+    border: 1px solid #efefef;
+}
+
+.button {
+    width: 100px;
+    outline: none;
+    height: 25px;
+    box-sizing: border-box;
+    border-radius: 4px;
+}

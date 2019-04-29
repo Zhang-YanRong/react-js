@@ -20,7 +20,18 @@ export default class Todoitem extends React.Component {
             </Fragment >
         )
     }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if (nextProps.content !== nextState.content) {
+    //         console.log(nextProps.content, 1111)
+    //         return true
+    //     } else {
+    //         return false
+    //     }
+    // }
 }
+
+
 
 Todoitem.propTypes = {
     content: PropTypes.oneOfType([

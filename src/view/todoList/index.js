@@ -3,13 +3,16 @@ import React, {
 } from 'react'
 import Header from '../../components/todoHeader/index'
 import Todoitem from '../../components/todoItem/index'
-
+import $axios from '../../axios/index'
+import { CSSTransition } from 'react-transition-group';
+import './index.css'
 export default class Todolist extends React.Component {
     constructor(props) {
         super(props) //调用父类 Component 的方法
         this.state = { //组件中存值
             value: '',
-            list: []
+            list: [],
+            show: true
         }
     }
 
@@ -27,12 +30,17 @@ export default class Todolist extends React.Component {
         //     list: [...this.state.list, this.state.value],
         //     value: ''
         // })
-        this.setState((preveState) => (
-            {
-                list: [...preveState.list, preveState.value],
-                value: ''
+        this.setState((preveState) => {
+            if (preveState.value.length > 0) {
+                return {
+                    list: [...preveState.list, preveState.value],
+                    value: ''
+                }
+            } else {
+                return
             }
-        ))
+
+        })
     }
 
     delete = (index) => {
@@ -65,6 +73,23 @@ export default class Todolist extends React.Component {
         })
     }
 
+    componentDidMount() {
+        $axios.post('/login', {
+            name: "admin",
+            pass: "123456"
+        }).then(res => {
+            console.log(res.data)
+        })
+    }
+
+    showOrHide = () => {
+        this.setState((preveState) => (
+            {
+                show: !preveState.show
+            }
+        ))
+    }
+
     render() {
         return (
             <Fragment >
@@ -74,10 +99,21 @@ export default class Todolist extends React.Component {
                     <button onClick={(e) => { this.addValue(e) }}>提交</button>
                 </div> */}
                 <Header ref="childRefValue"
+                    name={this.state.show ? 'hide' : 'show'}
                     value={this.state.value}
                     getValue={(value) => { this.getValue(value) }}
                     addValue={() => { this.addValue() }}
-                /> <ul> {this.getItemJsx()} </ul>
+                />
+                <CSSTransition
+                    in={this.state.show}
+                    timeout={6000}
+                    classNames="fade"
+                >
+                    <span>这是CSSTransition</span>
+                </CSSTransition>
+                <button onClick={() => { this.showOrHide() }} >{this.state.show ? '隐藏' : '展示'}</button>
+                <ul> {this.getItemJsx()} </ul>
+
             </Fragment>
         )
     }

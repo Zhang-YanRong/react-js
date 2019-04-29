@@ -1,17 +1,24 @@
 import React, { Fragment } from 'react'
-
+import './index.css'
 export default class Header extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             value: this.props.value,
-            refValue: '这是ref传值'
+            refValue: '这是ref传值',
+            show: false,
+            name: this.props.name
         }
     }
 
     click = (e) => {
         if (e.preventDefault) e.preventDefault()
         this.props.addValue()
+        this.setState((preveState) => (
+            {
+                show: !preveState.show
+            }
+        ))
     }
 
     inputChage = (e) => {
@@ -61,10 +68,10 @@ export default class Header extends React.Component {
         console.log('render')
         return (
             <Fragment>
-                <div>
+                <div className={this.props.name}>
                     <label htmlFor="insertArea">输入内容：</label>
                     <input id="insertArea" value={this.props.value} ref={(value) => { this.input = value }} onChange={(e) => { this.inputChage(e) }} placeholder="请输入想要做的事" type="text" />
-                    <button ref="refValue" onClick={(e) => { this.click(e) }}>提交</button>
+                    <button ref="refValue" className={this.state.show ? 'active button' : 'default button'} onClick={(e) => { this.click(e) }}>提交</button>
                 </div>
             </Fragment>
         )
