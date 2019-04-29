@@ -169,7 +169,8 @@ this.serState((preveState) => {
 
 ### react 是视图层框架 :
 
-下图中 A 组件和 B 组件没有嵌套和调用关系，但是就是想 A 给 B 传值，只能 A -> 1 -> 2 -> 3 -> 4 -> B
+![组件套用及传值图](https://github.com/479496771/react-js/blob/master/md-img/component.png)
+上图中 A 组件和 B 组件没有嵌套和调用关系，但是就是想 A 给 B 传值，只能 A -> 1 -> 2 -> 3 -> 4 -> B
 
 所以就需要数据层框架：redux、mbox、fluex
 

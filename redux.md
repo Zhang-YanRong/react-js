@@ -2,7 +2,9 @@
 
 > redux = reducer + flux
 
-### 形象理解
+### 图文理解
+
+![redux图](https://github.com/479496771/react-js/blob/master/md-img/redux.png)
 
 > A: action creators "要借什么书"
 > B: store "管理员"
