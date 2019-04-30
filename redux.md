@@ -290,3 +290,91 @@ export default class A_t_index extends React.Component {
   }
 }
 ```
+
+### redux-thunk
+
+[官方文档](https://github.com/reduxjs/redux-thunk target="\_blank")
+
+> redux 创建 stroe 的时候用 thunk 中间件，时 redux 的中间件
+
+```javascript
+yarn add redux-thunk
+```
+
+[redux-devtools（chrome 插件）](https://github.com/reduxjs/redux-devtools target="\_blank")
+
+在 stroe 中写法：
+
+```javascript
+import { createStore, applyMiddleware, compose } from "redux";
+import reducer from "./reducer.jsx";
+import thunk from "redux-thunk";
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+  : compose;
+const enhancer = composeEnhancers(applyMiddleware(thunk));
+
+//store调用reducer 把action传给reducer 去处理 返回数据
+const store = createStore(reducer, enhancer);
+
+export default store;
+```
+
+> 使用了 redux-thunk，在 create 中返回的 action 不单单只能时对象，还能够是方法
+
+##### 调用 redux-thunk 的 action(axios)
+
+actionCreate 文件中做异步工作：
+
+```javascript
+export const GetListData = () => {
+  //返回的这个函数可以获取store.dispatch方法
+  return dispatch => {
+    $axios
+      .post("/login", {
+        name: "admin",
+        pass: "123456"
+      })
+      .then(res => {
+        //InfoListValueActiong 方法在本文件中，可以直接调用这个action,更改store
+        //在action中创建新的action，并用dispatch方法派发给store
+        const action = InfoListValueActiong(Object.keys(res.data));
+        dispatch(action);
+      });
+  };
+};
+```
+
+组件的 componentDidMount()周期中创建 action,调用 actionCreate 中的方法：
+
+```javascript
+  componentDidMount() {
+    const action = GetListData()
+    store.dispatch(action)
+  }
+```
+
+### redux-thunk 中间件(把 dispatch 方法的升级)(解决异步代码拆分)
+
+![redux图](https://github.com/479496771/react-js/blob/master/md-img/redux-thunk.png)
+
+##### 图解如下
+
+> 1.view 通过 store.dispatch 会派发 action
+
+> 2.action 通过 dispatch 派发给 store (这个 dispath 在 action 返回的方法中可以当参数传进去调用)
+
+> 3.store 接收 action ，连同之前的 state 一起传给 reducer,
+
+> 4.reducer 返回一个新的 data 给 store
+
+> 5.store 改变自己的 state
+
+中间件指 action 和 store 之间
+
+dispatch 接收到对象，就把对象传给 store;如果接收到的是一个方法，会先让这个方法执行，
+
+### redux-log 中间件
+
+### redux-saga

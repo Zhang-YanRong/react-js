@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 import { Input, Button, List } from 'antd';
-import { getInputChangeActiong, getInputValueActiong, DeleteListValueActiong } from '../../store/actionCreate.jsx'
+import { getInputChangeActiong, addListValueActiong, DeleteListValueActiong } from '../../store/actionCreate.jsx'
 import store from '../../store/'
 
 const Search = Input.Search;
@@ -27,7 +27,10 @@ export default class A_t_index extends React.Component {
   }
 
   addValue = () => {
-    const action = getInputValueActiong(this.state.inputValue)
+    if (this.state.inputValue.trim() === "") {
+      return
+    }
+    const action = addListValueActiong(this.state.inputValue)
     store.dispatch(action)
   }
 

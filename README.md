@@ -198,7 +198,7 @@ Todoitem.defaultProps = {
 };
 ```
 
-[PropTypes 官方文档](https://reactjs.org/docs/typechecking-with-proptypes.html" target="\_blank")
+[PropTypes 官方文档](https://reactjs.org/docs/typechecking-with-proptypes.html target="\_blank")
 
 > 当组件中的 state 或者 props 发生改变的时候，render 函数会重新执行
 
@@ -292,3 +292,85 @@ shouldComponentUpdate (nextProps,nextState){
 ##### charles 抓取前端 http 请求,接口模拟,返回数据到指定 json 文件
 
 ### react-transition-group 动画包
+
+### 容器组件 && UI 组件 && 无状态组件
+
+> 容器组件：负责页面中的逻辑渲染
+> UI 组件：负责页面的样式
+> 无状态组件：只有 render 函数的组件
+
+##### UI 组件：
+
+> 只负页面渲染和简单的逻辑
+
+```javascriptReact
+class ToDoListUi extends React.Component {
+    render() {
+        return (
+            <div style={{ "margin": "20px" }}>
+
+                <Search placeholder="input search text"
+                    value={this.props.inputValue}
+                    onChange={(e) => { this.props.inputChagne(e) }}
+                    onSearch={value => console.log(value)}
+                    style={{ width: 200 }}
+                />
+
+                <Button type="primary"
+                    onClick={() => { this.props.addValue() }}
+                    style={{ "marginLeft": "20px" }}
+                >Submit</Button>
+
+                <List
+                    style={{ "marginTop": "20px", "width": "200px" }}
+                    bordered
+                    dataSource={this.props.list}
+                    renderItem={
+                        (item, index) =>
+                            (<List.Item onClick={
+                                (e) => { this.props.delete(e, index)
+                            }}>{item}</List.Item>)
+                    }
+                />
+            </div>
+        )
+    }
+}
+```
+
+##### 无状态组件：
+
+> 优点：性能最好（没有 render 函数）
+
+```javascriptReact
+const ToDoListUi = (props) => {
+    return (
+        <div style={{ "margin": "20px" }}>
+
+            <Search placeholder="input search text"
+                value={props.inputValue}
+                onChange={(e) => { props.inputChagne(e) }}
+                onSearch={value => console.log(value)}
+                style={{ width: 200 }}
+            />
+
+            <Button type="primary"
+                onClick={() => { props.addValue() }}
+                style={{ "marginLeft": "20px" }}
+             >Submit</Button>
+
+            <List
+                style={{ "marginTop": "20px", "width": "200px" }}
+                bordered
+                dataSource={props.list}
+                renderItem={
+                    (item, index) =>
+                        (<List.Item onClick={
+                            (e) => { props.delete(e, index)
+                        }}>{item}</List.Item>)
+                }
+            />
+        </div>
+    )
+}
+```
