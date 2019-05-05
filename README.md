@@ -299,6 +299,12 @@ shouldComponentUpdate (nextProps,nextState){
 > UI 组件：负责页面的样式
 > 无状态组件：只有 render 函数的组件
 
+纯函数组件的特点:
+组件不会被实例化,整体渲染性能得到提升
+组件不能访问 this 对象
+组件无法访问生命周期的方法
+无状态组件只能访问输入的 props,无副作用
+
 ##### UI 组件：
 
 > 只负页面渲染和简单的逻辑
@@ -373,4 +379,37 @@ const ToDoListUi = (props) => {
         </div>
     )
 }
+```
+
+### React.lazy
+
+> 是用来对项目代码进行分割,懒加载用的.只有当组件被加载,内部的资源才会导入(按需加载)
+> 使用了动态导入之后,webpack 检测到这种语法会自动代码分割,也就是压缩到两个文件里
+> Suspense 的作用就是在遇到异步请求或者异步导入组件的时候等待请求和导入完成再进行渲染,
+> Suspense 和 React.lazy()需要结合在一起用,否则会报错缺少 Placeholder UI
+
+Suspense 实现原理
+Subspense 的实现主要就是利用了**ComponentDidCatch 这个生命周期,这个什么周期就是用来捕获子组件树中的任何 Javascript 异常**
+
+源码就不分析了,这里说一下大概的流程步骤:
+父组件渲染到子组件时发现异步请求,直接抛出错误,捕获的结果是一个 Promise 对象
+ComponentDidCatch 捕获这个 Promise 对象,pending 状态下渲染 fallback 的
+当 resolve 时重新 render,遇到下一个异步请求重复上面操作
+直到整个父组件的抛出的 promise 对象都为 resolve,将 loading 替换为真正的组件.
+
+```bash
+import React, { Fragment, Suspense } from 'react'
+const Header = React.lazy(() => import('./todo-UI.jsx'));
+render(){
+    return(
+        <Suspense fallback={<div>Loading...</div>}>
+            <Header
+                value={this.state.value}
+                getInputValue={(value) => { this.getInputValue(value) }}
+                buttonClick={(e) => { this.addData(e) }}
+            />
+        </Suspense>
+    )
+}
+
 ```
