@@ -7,7 +7,7 @@ export default class Index extends React.Component {
         return (
             <div className="box" >
                 <p>
-                    <Link to="/ToDoList_UI">todolist-No.1</Link>
+                    <Link to="/Todolist">todolist-No.1</Link>
                 </p>
                 <p>
                     <Link to="/Antd">todolist-No.2-antd</Link>
@@ -16,10 +16,13 @@ export default class Index extends React.Component {
                     <Link to="/ToDoList_UI">todolist-No.3-UI逻辑分离/Redux_thunk</Link>
                 </p>
                 <p>
-                    <Link to="/ToDoList_UI">todolist-No.4-Redux_saga</Link>
+                    <Link to="/Redux_saga">todolist-No.4-Redux_saga</Link>
                 </p>
                 <p>
                     <Link to="/Todoreview">todolist-No.5-review</Link>
+                </p>
+                <p>
+                    <Link to="/React_redux">React_redux</Link>
                 </p>
             </div>
         )

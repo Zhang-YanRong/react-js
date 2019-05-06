@@ -71,7 +71,6 @@ export default class ToDoList_UI extends React.Component {
     //   const action = InfoListValueActiong(Object.keys(res.data))
     //   store.dispatch(action)
     // })
-
     const action = GetListData()
     store.dispatch(action)
   }

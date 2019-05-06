@@ -13,6 +13,7 @@ const A_t_index = React.lazy(() => import("../view/antd-todolist/index.jsx"))
 const ToDoList_UI = React.lazy(() => import("../view/todolistUI/index.jsx"))
 const Redux_saga = React.lazy(() => import("../view/todolistUI/redux-saga.jsx"))
 const Todoreview = React.lazy(() => import("../view/review/todolist.jsx"))
+const React_redux = React.lazy(() => import("../view/react-redux/index.jsx"))
 
 
 export default class IRoute extends React.Component {
@@ -23,11 +24,12 @@ export default class IRoute extends React.Component {
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
               <Route path="/" exact component={Index} />
-              <Route path="/todolist" component={Todolist} />
+              <Route path="/Todolist" component={Todolist} />
               <Route path="/Antd" component={A_t_index} />
               <Route path="/ToDoList_UI" component={ToDoList_UI} />
               <Route path="/Redux_saga" component={Redux_saga} />
               <Route path="/Todoreview" component={Todoreview} />
+              <Route path="/React_redux" component={React_redux} />
             </Switch>
           </Suspense>
         </App>

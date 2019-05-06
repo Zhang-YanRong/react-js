@@ -52,6 +52,7 @@ export default class Redux_saga extends React.Component {
     render() {
         return (
             <Fragment>
+                1131313
                 <ToDoListUi
                     inputValue={this.state.inputValue}
                     inputChagne={(e) => { this.inputChagne(e) }}
@@ -62,6 +63,7 @@ export default class Redux_saga extends React.Component {
             </Fragment>
         );
     }
+
 
     componentDidMount() {
         $axios.post('/login', {

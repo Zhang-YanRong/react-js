@@ -36,11 +36,12 @@ const Search = Input.Search;
 const ToDoListUi = (props) => {
     return (
         <div style={{ "margin": "20px" }}>
+            111
             <Search placeholder="input search text"
                 value={props.inputValue}
                 onChange={(e) => { props.inputChagne(e) }}
                 onSearch={value => console.log(value)}
-                style={{ width: 200 }}
+                style={{ "width": "200px", "color": "#000" }}
             />
             <Button type="primary" onClick={() => { props.addValue() }} style={{ "marginLeft": "20px" }}>Submit</Button>
             <List
